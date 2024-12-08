@@ -62,12 +62,10 @@ const storage = multer.diskStorage({
 
 const upload = multer({ storage: storage });
 
-// app.use(express.static('public'));
 
 
 // Serve static files from the uploads directory
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
-// app.use(express.static(path.join(__dirname, 'public')));
 app.post('/uploads', upload.single('image'), (req, res) => {
     console.log(req.file)
     if (!req.file) {
@@ -202,7 +200,8 @@ app.post('/paystack/webhook', express.json(), (req, res) => {
 
 // app.use(express.static(path.join(__dirname, 'public')));
 // app.use(express.static(path.join(__dirname, 'public')));
-app.use('/public', express.static(path.join(__dirname, '..', 'public')));
+app.use(express.static(path.join(__dirname, '..', 'public')));
+
 
 app.use(express.static('public', {
     setHeaders: (res, path) => {
