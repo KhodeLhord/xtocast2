@@ -62,6 +62,7 @@ const storage = multer.diskStorage({
 
 const upload = multer({ storage: storage });
 
+// app.use(express.static('public'));
 
 
 // Serve static files from the uploads directory
@@ -200,8 +201,7 @@ app.post('/paystack/webhook', express.json(), (req, res) => {
 
 // app.use(express.static(path.join(__dirname, 'public')));
 // app.use(express.static(path.join(__dirname, 'public')));
-app.use(express.static(path.join(__dirname, '..', 'public')));
-
+// app.use('/public', express.static(path.join(__dirname, '..', 'public')));
 
 app.use(express.static('public', {
     setHeaders: (res, path) => {
@@ -212,7 +212,7 @@ app.use(express.static('public', {
 }));
 
 
-app.use('/assets', express.static(path.join(__dirname, 'public', 'assets')));
+// app.use('/assets', express.static(path.join(__dirname, 'public', 'assets')));
 
 
 
@@ -224,12 +224,18 @@ app.use('/assets', express.static(path.join(__dirname, 'public', 'assets')));
 //     res.sendFile(categoriesFilePath);
 //   });
 
+app.use(express.static(path.join(__dirname, '..', 'public')));
+// app.use(express.static(path.join(__dirname, 'public')));
+
+
+
 app.get('/competitions/:eventId/categories.html', (req, res) => {
     const filePath = path.join(__dirname, '..', 'public', 'competitions', 'categories.html');
     res.sendFile(filePath);
 });
 
-// Serve categories.js file for a specific event
+
+// // Serve categories.js file for a specific event
 app.get('/competitions/:eventId/categories.js', (req, res) => {
     const jsFilePath = path.join(__dirname, '..', 'public', 'competitions', 'categories.js');
     res.sendFile(jsFilePath);
@@ -243,16 +249,16 @@ app.get('/competitions/:eventId/categories.js', (req, res) => {
 // });
 
 // Route-ka nominees.html
-app.get('/competitions/:eventId/nominees.html', (req, res) => {
-    const filePath = path.join(__dirname, '..', 'public', 'competitions', 'nominees.html');
-    res.sendFile(filePath);
-});
+// app.get('/competitions/:eventId/nominees.html', (req, res) => {
+//     const filePath = path.join(__dirname, '..', 'public', 'competitions', 'nominees.html');
+//     res.sendFile(filePath);
+// });
 
-// Route-ka vote.html
-app.get('/competitions/:eventId/vote.html', (req, res) => {
-    const filePath = path.join(__dirname, 'public', 'competitions', 'vote.html');
-    res.sendFile(filePath);
-});
+// // Route-ka vote.html
+// app.get('/competitions/:eventId/vote.html', (req, res) => {
+//     const filePath = path.join(__dirname, 'public', 'competitions', 'vote.html');
+//     res.sendFile(filePath);
+// });
 
   
   app.get('/campaign/:eventId/details.html', (req, res) => {
