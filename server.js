@@ -230,9 +230,16 @@ app.use(express.static(path.join(__dirname, '..', 'public')));
 
 
 app.get('/competitions/:eventId/categories.html', (req, res) => {
-    const filePath = path.join(__dirname, '..', 'public', 'competitions', 'categories.html');
-    res.sendFile(filePath);
+    const filePath = path.join(__dirname, 'public', 'competitions', 'categories.html');
+    res.sendFile(filePath, (err) => {
+        if (err) {
+            console.log('Error:', err);
+        } else {
+            console.log('File sent successfully');
+        }
+    });
 });
+
 
 
 // // Serve categories.js file for a specific event
